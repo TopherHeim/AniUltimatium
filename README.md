@@ -24,7 +24,7 @@ This app combines all anime apis into one.
 [![AniList](https://img.shields.io/badge/AniList-sync-02a9ff)](#anilist)
 [![Last commit](https://img.shields.io/github/last-commit/AdvaithAvinash/AniUltimatium?color=555)](https://github.com/AdvaithAvinash/AniUltimatium/commits/main)
 
-Download the latest [`Aniultimatium.wgt`](https://github.com/AdvaithAvinash/AniUltimatium/releases/latest/download/Aniultimatium.wgt) (Samsung) or [`Aniultimatium.apk`](https://github.com/AdvaithAvinash/AniUltimatium/releases/latest/download/Aniultimatium.apk) (Android TV / Fire TV) · [all releases](https://github.com/AdvaithAvinash/AniUltimatium/releases/latest) · [Live TV (IPTV)](#live-tv-iptv) · [Install on Samsung](#install-on-a-samsung-tv) · [Install on Android TV / Fire TV](#install-on-android-tv-and-fire-tv) · [FAQ](#faq) · [Developer docs](#developer-documentation) · [Website](https://aniultimatium.advaithavinash404.workers.dev/)
+Download the latest [`Aniultimatium.wgt`](https://github.com/AdvaithAvinash/AniUltimatium/releases/latest/download/Aniultimatium.wgt) (Samsung) or [`Aniultimatium.apk`](https://github.com/AdvaithAvinash/AniUltimatium/releases/latest/download/Aniultimatium.apk) (Android TV / Fire TV) · [all releases](https://github.com/AdvaithAvinash/AniUltimatium/releases/latest) · [Live TV (IPTV)](#live-tv-iptv) · [Install on Samsung](#install-on-a-samsung-tv) · [Install on Android TV / Fire TV](#install-on-android-tv-and-fire-tv) · [FAQ](#faq) · [Developer docs](#developer-documentation) · [Website](https://aniultimatium.animeforalyssa.workers.dev/)
 
 ## Quick facts
 | | |
@@ -42,7 +42,7 @@ Download the latest [`Aniultimatium.wgt`](https://github.com/AdvaithAvinash/AniU
 | **Stability** | Playback guard (frozen / no-picture streams recovered step by step, then a clear panel), server-side stream verification, SourceIQ that learns smoothness and resolution, a start-up safe mode after three failed starts, time limits and one automatic retry on API calls, memory trimming on Android, and a clear recovery screen instead of a black page |
 | **Extra sources** | Optional, in Settings: debrid service (Real-Debrid, AllDebrid, Premiumize, TorBox; the key stays on your device), Stremio / Nuvio add-ons, a CinePro Core server. They play in our own player, so they also work on Tizen 4. Nothing here is required |
 | **Movies & TV** | Movies and TV Shows tabs (seasons, episodes, next episode) with CineSrc, VidFast, VidCore, Videasy, 2Embed, SuperEmbed, VidSrc.to, VidSrc.me, optional VidLink and public-domain films. Hosted players run in a popup-blocking frame (Settings can turn it off). Those hosted players need a 2020+ browser, so on Tizen 4–6 TVs only public-domain films play unless you add a **stream add-on** (Settings), whose plain video files play in our own player; the app tells you instead of hanging |
-| **Cost** | Free. No ads in our own player except a banner ad when you pause the player. Hosted on a free Cloudflare Worker, or run it at home with `npm start` |
+| **Cost** | Free. No ads in our own player (hosted movie / TV players are other sites' pages and may show their own). Hosted on a free Cloudflare Worker, or run it at home with `npm start` |
 | **Install** | Samsung: sideload `Aniultimatium.wgt` with [Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung/releases) (no store account needed). Android TV / Fire TV: install `Aniultimatium.apk` ([steps](docs/ANDROID.md)) |
 
 ## How Aniultimatium compares
@@ -200,6 +200,8 @@ Sources differ per title. Open the player menu, then **Source**, to try another;
 **How do I link AniList?** Account, then AniList, then *Link AniList*; open the address shown on the TV on your phone and enter the code. Details in [AniList](#anilist).
 
 **Can I run it without Cloudflare?** Yes: `npm install && npm start` on a computer on your Wi-Fi, then enter its address in the TV app (Settings, Stream server). A home IP is the most reliable for streaming sites.
+
+**My IPTV provider or add-on is on my own network and the server refuses it.** The server only fetches public internet addresses, so that nobody can use it to reach devices on your network. If you run it at home and really want it to reach a private address (for example a tuner at `192.168.x.x`), start it with `ALLOW_PRIVATE_ADDONS=1 npm start`.
 
 ## Performance (measured)
 `tools/bench_sources.js` compares the old behaviour (`?turbo=0`) with TurboScrape **on the same live Cloudflare Worker, interleaved**, following the same retry loop the app uses.
